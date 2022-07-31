@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        th{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1 onclick="location.href='/'">Register</h1>
+    <div class="container-register">
+        <form action="/register" method="post">
+
+            <table>
+                <tr>
+                    <th>id</th>
+                    <td><input type="text" name="id" id="id" class="pw"></td>
+                </tr>
+                <tr>
+                    <th>password</th>
+                    <td><input type="text" name="pw" id="pw" class="pw"></td>
+                </tr>
+                <tr>
+                    <th>passwordChk</th>
+                    <td>
+                        <input type="text" id="pwChk">
+                        <i id="icon_pw"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <th>birth</th>
+                    <td><input type="text" name="birth" id=""></td>
+                </tr>
+                <tr>
+                    <th>HP</th>
+                    <td><input type="text" name="hp" id=""></td>
+                </tr>
+                <tr style="text-align:right">
+                    <td colspan="2" >
+                        <input type="button" value="로그인" onclick="location.href='/login'">
+                        <input type="submit" value="회원가입">
+                    </td>
+                </tr>
+            </table>
+        </form>
+            
+    </div>
+<script>
+    const pw = document.querySelector('#pw')
+    const pwChk = document.querySelector('#pwChk')
+    const arrPw = document.querySelectorAll('.pw')
+    const iconPw = document.querySelector('#icon_pw')
+
+    function chk(){
+        if(pwChk.value.length > 5 && pw.value.length > 5){
+            console.log(pw.value == pwChk.value)
+            console.log(pw.value, pwChk.value)
+            if(pw.value == pwChk.value){
+                iconPw.innerHTML = '비밀번호 일치'
+            } else {
+                iconPw.innerHTML = '비밀번호 불일치'
+            }
+        }
+    }
+
+    arrPw.forEach((a,i)=>{
+        a.addEventListener('keypress',chk);
+    })
+
+</script>
+</body>
+</html>
