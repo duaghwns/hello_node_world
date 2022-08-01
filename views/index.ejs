@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 onclick="location.href='/'">안녕하세요</h1>
+    <div class="navbar">
+        <a href="/login">login</a>
+        <a href="/register">register</a>
+        <a href="#">#</a>
+        <a href="#">#</a>
+        <a href="#">#</a>
+    </div>
+
+<hr>
+    <div>
+        <form action="/todo" method="post">
+            <table border="1px solid">
+                <tr>
+                    <th colspan="2">
+                        <h2>todo</h2>
+                    </th>
+                </tr>
+                <tr>
+                    <th>title</th>
+                    <td><input type="text" name="title" id=""></td>
+                </tr>
+                <tr>
+                    <th>content</th>
+                    <td><input type="text" name="content" id=""></td>
+                </tr>
+                <tr>
+                    <th>date</th>
+                    <td>
+                        <input type="date" name="date" id="">
+                    </td>
+                </tr>
+                <tr style="text-align: right">
+                    <td colspan="2"><input type="submit" value="Check!"></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+
+        <div>
+            <table>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>
+                </tr>
+                <% for(let i =0; i< posts.length; i++) { %>
+                    <tr>
+                        <td><%= i %></td>
+                        <td><a href="/posts/<%=i%>"><%= posts[i].title %></a></td>
+                        <td><%= posts[i].writer %></td>
+                        <td><%= posts[i].date %></td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+</body>
+</html>
