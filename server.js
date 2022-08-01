@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const user = require('./js/user');
 
 // npm install nodemon
 // npm install mongodb
-const MongoClient = require('mongodb').MongoClient;
 // npm install body-parser
+const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const _dirPages = __dirname + '/pages/'
 const port = 8080;
@@ -41,6 +42,7 @@ let saveTodo;
     app.listen(port, ()=> {
         console.log(`listening on port ${port}`)
     });
+
     app.use(bodyParser.urlencoded({ extended : true }));
     
     
@@ -83,31 +85,18 @@ let saveTodo;
         res.sendFile(_dirPages + 'register.html')
     })
 
-    app.post('/register', (req, res) => {
-        const user = {
-            _id: req.body.id,
-            name : req.body.name,
-            password : req.body.pw,
-            birth : req.body.birth,
-            email : req.body.email,
-            ph : req.body.hp
-        }
-
-        if(req.body != null){
-            saveUser(user);
-        }
-
-        res.sendFile(_dirPages + 'login.html')
-    })
+    app.post('/register', user.saveUser)
 
     app.post('/todo', (req, res)=>{
-        const todo = {
-            title: req.body.title,
-            content : req.body.content,
-            date : req.body.date
-        }
-
-        saveTodo(todo);
-
-        res.sendFile(_dirPages + 'index.html')
+        db.collection('counter').findOne('todoCounter',(e,data)=>{
+            if(e) return console.log(e)
+            console.log(data.name)
+            const todo = {
+                _id : data.totalCount + 1,
+                title: req.body.title,
+                content : req.body.content,
+                date : req.body.date
+            }
+            saveTodo(todo);
+        })
     })
