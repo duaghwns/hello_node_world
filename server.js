@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
+
+// npm install nodemon
+// npm install mongodb
 const MongoClient = require('mongodb').MongoClient;
+// npm install body-parser
 const bodyParser = require('body-parser');
 const _dirPages = __dirname + '/pages/'
 const port = 8080;
 const mongoUrl = 'mongodb+srv://root:root@cluster0.n5blm.mongodb.net/?retryWrites=true&w=majority'
+// ejs 사용
+app.set('view engine', 'ejs')
+
 let db;
 let saveUser;
 
