@@ -40,13 +40,10 @@ let saveTodo;
         }
     })
 
-    app.listen(port, ()=> {
-        console.log(`listening on port ${port}`)
-    });
-
+    app.listen(port, ()=> {console.log(`listening on port ${port}`)});
     app.use(bodyParser.urlencoded({ extended : true }));
     
-    
+    // home
     app.get('/', (req, res) => {
         let postData = db.collection('post').find().toArray((e,data) => {
             if(e) return console.log(e)
