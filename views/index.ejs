@@ -60,9 +60,18 @@
                         <td><a href="/posts/<%=i%>"><%= posts[i].title %></a></td>
                         <td><%= posts[i].writer %></td>
                         <td><%= posts[i].date %></td>
+                        <td><button class="del_todd">삭제</button></td>
                     </tr>
                 <% } %>
             </table>
         </div>
+<script>
+    $('.del_todd').click(()=>{
+        $.ajax('delete',()=>{
+            
+        })
+    })
+    
+</script>
 </body>
 </html>

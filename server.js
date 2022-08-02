@@ -8,7 +8,7 @@ const todo = require('./todo');
 // npm install body-parser
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
-exports._dirPages = __dirname + '/pages/'
+const _dirPages = __dirname + '/pages/'
 const port = 8080;
 const mongoUrl = 'mongodb+srv://root:root@cluster0.n5blm.mongodb.net/?retryWrites=true&w=majority'
 // ejs 사용
@@ -54,6 +54,7 @@ MongoClient.connect(mongoUrl, (err, client) => {
     
     // user Register
     app.get('/register', (req, res) => {
+        console.log(_dirPages)
         res.sendFile(_dirPages + 'register.html')
     })
     app.post('/register', (req, res)=>{
