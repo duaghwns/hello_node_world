@@ -67,8 +67,14 @@
         </div>
 <script>
     $('.del_todd').click(()=>{
-        $.ajax('delete',()=>{
-            
+        $.ajax({
+            method: 'POST',
+            url : '/delete',
+            data : {}
+        }).done(res=>{
+            console.log(res)
+        }).fail(err=>{
+            console.log(err)
         })
     })
     
