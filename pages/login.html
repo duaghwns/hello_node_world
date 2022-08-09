@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/login.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div>
-        <h1 onclick="location.href='/'">Login</h1>
-        
-        <form action="/login" method="post">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <td><input type="text" name="id" id=""></td>
-                </tr>
-                <tr>
-                    <th>PW</th>
-                    <td><input type="password" name="pw" id=""></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align:center;">
-                        <input type="submit" value="로그인">
-                        <input type="button" value="회원가입" onclick="location.href='/register.html'">
-                    </td>
-                </tr>
-            </table>
-        </form>
+    <div class="container">
+        <div class="container-box">
+            <h1 onclick="location.href='/'">Login</h1>
+            <form action="/login" method="post">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <td><input type="text" name="id" id=""></td>
+                    </tr>
+                    <tr>
+                        <th>PW</th>
+                        <td><input type="password" name="pw" id=""></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="saveId" id="">
+                            <span>아이디 저장</span>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="autoLogin" id="">
+                            <span>자동 로그인</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            <input type="submit" value="로그인">
+                            <input type="button" value="회원가입" onclick="location.href='/register.html'">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>

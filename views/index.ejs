@@ -65,15 +65,15 @@
                 <% } %>
             </table>
         </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $('.del_todd').click(()=>{
         $.ajax({
             method: 'DELETE',
             url : '/delete',
-            data : {_id : e.target.dataset.id}
+            data : { _id : e.target.dataset.id }
         }).done(res=>{
             $(this).parent('tr').fadeOut();
-            
         }).fail(err=>{
             console.log(err)
 

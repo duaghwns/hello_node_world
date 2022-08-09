@@ -1,0 +1,11 @@
+.container {
+    position: relative;
+    left: 50%;
+    background-color: aqua;
+    height: 600px;
+    width: 600px;
+}
+
+body {
+    background-color: red;
+}

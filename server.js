@@ -112,7 +112,13 @@ MongoClient.connect(mongoUrl, (err, client) => {
 
     app.delete('/delete', (req, res) => {
         res.send('삭제완료')
-        
+        console.log(req.body)
+        require.body._id = parseInt(req.body._id,);
+        db.collection('post').deleteOne(req.body, (err, result) => {
+            if(err) return console.log(err)
+            console.log(result)
+            res.status(200).send({message: '성공했습니다'});
+        })
     })
 
     // // user Register
