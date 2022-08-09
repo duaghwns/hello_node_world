@@ -1,9 +1,9 @@
+
 <h1>INSTALL</h1>
+<hr>
 ```
-<p>
-npm install express<br>
-npm install -g nodemon<br>
-npm install body-parser<br>
-npm install mongodb<br>
-</p>
+npm install express
+npm install -g nodemon
+npm install body-parser
+npm install mongodb
 ```
