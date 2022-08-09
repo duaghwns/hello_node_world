@@ -1,6 +1,5 @@
 
 <h1>INSTALL</h1>
-<hr>
 
 ~~~
 npm install express
