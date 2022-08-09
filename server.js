@@ -110,6 +110,10 @@ MongoClient.connect(mongoUrl, (err, client) => {
         })
     })
 
+    app.delete('/delete', (req, res) => {
+        res.send('삭제완료')
+        
+    })
 
     // // user Register
     // app.get('/register', user.loadRegister)

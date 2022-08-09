@@ -68,13 +68,15 @@
 <script>
     $('.del_todd').click(()=>{
         $.ajax({
-            method: 'POST',
+            method: 'DELETE',
             url : '/delete',
-            data : {}
+            data : {_id : e.target.dataset.id}
         }).done(res=>{
-            console.log(res)
+            $(this).parent('tr').fadeOut();
+            
         }).fail(err=>{
             console.log(err)
+
         })
     })
     
