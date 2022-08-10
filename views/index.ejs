@@ -69,6 +69,8 @@
         </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
+    
+    // 삭제버튼 클릭
     $('.del_todd').click(e => {
         console.log(e.target.dataset.id)
         $.ajax({
@@ -76,8 +78,7 @@
             url : '/delete',
             data : { _id : e.target.dataset.id }})
         .done( res => {
-            console.log($(this).parent('td'))
-            $(this).parent('td').parent('tr').fadeOut();})
+            $(this).parent().parent().fadeOut();})
         .fail( err => {
             console.log(err)
         })
