@@ -1,17 +1,12 @@
 const express = require('express');
-const app = express();
-const user = require('./user');
-const todo = require('./todo');
-
-// npm install nodemon
-// npm install mongodb
-// npm install body-parser
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const _dirPages = __dirname + '/pages/'
-const port = 8080;
 const mongoUrl = 'mongodb+srv://root:root@cluster0.n5blm.mongodb.net/?retryWrites=true&w=majority'
+
 // ejs 사용
+const app = express();
+const port = 8080;
 app.set('view engine', 'ejs');
 
 let db;
@@ -77,7 +72,13 @@ MongoClient.connect(mongoUrl, (err, client) => {
     app.get('/login', (req, res)=>{
         res.sendFile(_dirPages + 'login.html')
     })
-    app.post('/login', user.login)
+    app.post('/login', (req, res) => {
+        const id = req.body.id;
+        const pw = req.body.pw;
+            
+        console.log(`id : ${id}`)
+        console.log(`pw : ${pw}`)
+    })
     
     // todo
     app.get('/todo', (req, res) => {

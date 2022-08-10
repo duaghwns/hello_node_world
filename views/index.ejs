@@ -60,21 +60,24 @@
                         <td><a href="/posts/<%=i%>"><%= posts[i].title %></a></td>
                         <td><%= posts[i].writer %></td>
                         <td><%= posts[i].date %></td>
-                        <td><button class="del_todd">삭제</button></td>
+                        <td>
+                            <button class="del_todd" dataset="<%=i%>">삭제</button>
+                        </td>
                     </tr>
                 <% } %>
             </table>
         </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-    $('.del_todd').click(()=>{
+    $('.del_todd').click(e => {
+        console.log(e)
         $.ajax({
             method: 'DELETE',
             url : '/delete',
-            data : { _id : e.target.dataset.id }
-        }).done(res=>{
-            $(this).parent('tr').fadeOut();
-        }).fail(err=>{
+            data : { _id : e.target.dataset.id }})
+        .done( res => {
+            $(this).parent('tr').fadeOut();})
+        .fail( err => {
             console.log(err)
 
         })
