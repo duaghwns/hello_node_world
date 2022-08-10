@@ -55,7 +55,7 @@
                     <th>날짜</th>
                 </tr>
                 <% for(let i =0; i< posts.length; i++) { %>
-                    <tr>
+                    <tr id="post<%=posts[i]._id%>" >
                         <td><%= i+1 %></td>
                         <td><a href="/posts/<%=i%>"><%= posts[i].title %></a></td>
                         <td><%= posts[i].writer %></td>
@@ -72,13 +72,13 @@
     
     // 삭제버튼 클릭
     $('.del_todd').click(e => {
-        console.log(e.target.dataset.id)
+        let post_id = e.target.dataset.id;
         $.ajax({
             method: 'DELETE',
             url : '/delete',
-            data : { _id : e.target.dataset.id }})
+            data : { _id : post_id }})
         .done( res => {
-            $(this).parent().parent().fadeOut();})
+            $(`#post${post_id}`).fadeOut();})
         .fail( err => {
             console.log(err)
         })
