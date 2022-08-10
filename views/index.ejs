@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1 onclick="location.href='/'">안녕하세요</h1>
     <div class="navbar">
@@ -16,7 +18,7 @@
         <a href="#">#</a>
     </div>
 
-<hr>
+    <hr>
     <div>
         <form action="/todo" method="post">
             <table border="1px solid">
@@ -44,45 +46,57 @@
                 </tr>
             </table>
         </form>
-        </div>
-<hr>
-        <div>
-            <table>
-                <tr>
-                    <th>글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
+    </div>
+    <hr>
+    <div>
+        <table>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>날짜</th>
+            </tr>
+            <% for(let i=0; i< posts.length; i++) { %>
+                <tr id="post<%=posts[i]._id%>">
+                    <td>
+                        <%= i+1 %>
+                    </td>
+                    <td><a href="/detail/<%=posts[i]._id%>">
+                            <%= posts[i].title %>
+                        </a></td>
+                    <td>
+                        <%= posts[i].writer %>
+                    </td>
+                    <td>
+                        <%= posts[i].date %>
+                    </td>
+                    <td>
+                        <button class="del_todd" data-id="<%= posts[i]._id %>">삭제</button>
+                    </td>
                 </tr>
-                <% for(let i =0; i< posts.length; i++) { %>
-                    <tr id="post<%=posts[i]._id%>" >
-                        <td><%= i+1 %></td>
-                        <td><a href="/posts/<%=i%>"><%= posts[i].title %></a></td>
-                        <td><%= posts[i].writer %></td>
-                        <td><%= posts[i].date %></td>
-                        <td>
-                            <button class="del_todd" data-id="<%= posts[i]._id %>">삭제</button>
-                        </td>
-                    </tr>
                 <% } %>
-            </table>
-        </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    
-    // 삭제버튼 클릭
-    $('.del_todd').click(e => {
-        let post_id = e.target.dataset.id;
-        $.ajax({
-            method: 'DELETE',
-            url : '/delete',
-            data : { _id : post_id }})
-        .done( res => {
-            $(`#post${post_id}`).fadeOut();})
-        .fail( err => {
-            console.log(err)
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        // 삭제버튼 클릭
+        $('.del_todd').click(e => {
+            let post_id = e.target.dataset.id;
+            $.ajax({
+                method: 'DELETE',
+                url: '/delete',
+                data: { _id: post_id }
+            })
+                .done(res => {
+                    // 게시물 사라지게
+                    $(`#post${post_id}`).fadeOut();
+                })
+                .fail(err => {
+                    console.log(err)
+                })
         })
-    })
-</script>
+    </script>
 </body>
+
 </html>
