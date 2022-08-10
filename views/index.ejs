@@ -61,7 +61,7 @@
                         <td><%= posts[i].writer %></td>
                         <td><%= posts[i].date %></td>
                         <td>
-                            <button class="del_todd" dataset="<%=i%>">삭제</button>
+                            <button class="del_todd" data-id="<%= posts[i]._id %>">삭제</button>
                         </td>
                     </tr>
                 <% } %>
@@ -70,19 +70,18 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $('.del_todd').click(e => {
-        console.log(e)
+        console.log(e.target.dataset.id)
         $.ajax({
             method: 'DELETE',
             url : '/delete',
             data : { _id : e.target.dataset.id }})
         .done( res => {
-            $(this).parent('tr').fadeOut();})
+            console.log($(this).parent('td'))
+            $(this).parent('td').parent('tr').fadeOut();})
         .fail( err => {
             console.log(err)
-
         })
     })
-    
 </script>
 </body>
 </html>
