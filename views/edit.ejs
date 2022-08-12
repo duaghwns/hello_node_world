@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 onclick="location.href='/'">상세페이지</h1>
+    <div class="navbar">
+        <a href="/login">login</a>
+        <a href="/register">register</a>
+        <a href="#">#</a>
+        <a href="#">#</a>
+        <a href="#">#</a>
+    </div>
+    <hr>
+    <div>
+        <div class="container mt-3">
+            <div class="card" style="width: 100%">
+                <div class="card-body">
+                    <form action="/edit/<%= id %>" method="post">
+
+                        <h5 class="card-title">
+                            <input type="text" name="title" placeholder="<%= data.title %>" value="<%= data.title %>">
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <input type="date" name="date" value="<%= data.date %>">
+                        </h6>
+                        <p class="card-text">
+                            <textarea name="content" placeholder="<%= data.content %>" cols="30" rows="10">
+                                <%= data.content %>
+                            </textarea>
+                        </p>
+                        <input type="submit" class="btn btn-primary card-link" value="수정하기" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        // 삭제버튼 클릭
+        $('.del_todd').click(e => {
+            let post_id = e.target.dataset.id;
+            $.ajax({
+                method: 'DELETE',
+                url: '/delete',
+                data: { _id: post_id }
+            })
+                .done(res => {
+                    // 게시물 사라지게
+                    $(`#post${post_id}`).fadeOut();
+                })
+                .fail(err => {
+                    console.log(err)
+                })
+        });
+    </script>
+</body>
+
+</html>
