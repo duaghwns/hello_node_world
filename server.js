@@ -130,6 +130,14 @@ MongoClient.connect(mongoUrl, (err, client) => {
         })
     });
 
+    app.get('/edit/:id', (req, res) => {
+        console.log(req.params.id)
+        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result)=>{
+            if(e) return console.log(e)
+            console.log(result)
+        })
+    })
+
     // // user Register
     // app.get('/register', user.loadRegister)
     // app.post('/register', user.saveUser)

@@ -33,31 +33,12 @@
                     <p class="card-text">
                         <%= data.content %>
                     </p>
-                    <a href="#" class="card-link">수정하기</a>
+                    <a href="/edit/<%= data._id %>" class="btn btn-primary card-link">수정하기</a>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-
-        // 삭제버튼 클릭
-        $('.del_todd').click(e => {
-            let post_id = e.target.dataset.id;
-            $.ajax({
-                method: 'DELETE',
-                url: '/delete',
-                data: { _id: post_id }
-            })
-                .done(res => {
-                    // 게시물 사라지게
-                    $(`#post${post_id}`).fadeOut();
-                })
-                .fail(err => {
-                    console.log(err)
-                })
-        });
-    </script>
 </body>
 
 </html>
