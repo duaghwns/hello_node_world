@@ -88,22 +88,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
 
-        // 삭제버튼 클릭
-        $('.del_todd').click(e => {
-            let post_id = e.target.dataset.id;
-            $.ajax({
-                method: 'DELETE',
-                url: '/delete',
-                data: { _id: post_id }
-            })
-                .done(res => {
-                    // 게시물 사라지게
-                    $(`#post${post_id}`).fadeOut();
-                })
-                .fail(err => {
-                    console.log(err)
-                })
-        })
     </script>
 </body>
 
