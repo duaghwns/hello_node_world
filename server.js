@@ -135,6 +135,7 @@ MongoClient.connect(mongoUrl, (err, client) => {
         db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result)=>{
             if(e) return console.log(e)
             console.log(result)
+            res.render('edit.ejs',{data : result})
         })
     })
 
