@@ -40,17 +40,15 @@
                     <td><input type="text" name="title" placeholder="title"></td>
                 </tr>
                 <tr>
-                    <th>content</th>
+                    <th>content </th>
                     <td><textarea name="content" placeholder="내용을 입력하세요" cols="22" rows="5"></textarea></td>
                 </tr>
                 <tr>
                     <th>date</th>
                     <td>
                         <input type="date" name="date">
+                        <input type="submit" value="Check!">
                     </td>
-                </tr>
-                <tr style="text-align: right">
-                    <td colspan="2"><input type="submit" value="Check!"></td>
                 </tr>
             </table>
         </form>
@@ -58,16 +56,17 @@
     <hr>
     <div class="m30">
         <table>
-            <tr>
+            <tr style="text-align:center;">
                 <th>글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>날짜</th>
             </tr>
-            <% for(let i=0; i< posts.length; i++) { %>
+            <% for(let i=posts.length-1; i >= 0; i--) { %>
                 <tr id="post<%=posts[i]._id%>">
                     <td>
                         <%= i+1 %>
+                        (<%=posts[i]._id%>)
                     </td>
                     <td><a href="/detail/<%=posts[i]._id%>">
                             <%= posts[i].title %>

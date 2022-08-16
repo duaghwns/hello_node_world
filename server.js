@@ -100,7 +100,6 @@ MongoClient.connect(mongoUrl, (err, client) => {
     })
 
     app.post('/todo', (req, res) => {
-        res.send('전송완료')
         db.collection('counter').findOne({name:'todoCounter'},(e,data)=>{
             if(e) return console.log(e)
             const todo = {
@@ -115,6 +114,11 @@ MongoClient.connect(mongoUrl, (err, client) => {
                 if(e) return console.log(e)
                 console.log('update!')
                 console.log(result)
+                db.collection('post').find().toArray((e,data) => {
+                    if(e) return console.log(e)
+                    console.log(data)
+                    res.render('index.ejs', {posts : data})
+                })
             })
         })
     })
@@ -162,7 +166,11 @@ MongoClient.connect(mongoUrl, (err, client) => {
         db.collection('post').updateOne({_id : d_id}, {$set:todo}, (err,result) => {
             if(err) return console.log(err);
             console.log('update!')
-            res.render('view.ejs',{data : result})
+            db.collection('post').find().toArray((e,data) => {
+                if(e) return console.log(e)
+                console.log(data)
+                res.render('index.ejs', {posts : data})
+            })
         });
 
     });
