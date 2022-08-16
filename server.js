@@ -139,34 +139,33 @@ MongoClient.connect(mongoUrl, (err, client) => {
     });
 
     app.get('/edit/:id', (req, res) => {
-        console.log(req.params.id)
-        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result)=>{
+        console.log(req.params.id);
+
+        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result) => {
             if(e) return console.log(e)
             console.log(result)
-            res.render('edit.ejs',{data : result})
-        })
-    })
+
+            res.render('edit.ejs',{data : result});
+        });
+    });
 
     app.post('/edit/:id', (req, res) => {
-        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result)=>{
-            if(e) return console.log(e)
-            console.log(result)
-            console.log(req.body)
-            console.log(req.params)
-            const todo = {
-                _id : req.params._id,
-                title : req.body.title,
-                content : req.body.content,
-                date : req.body.date
-            }
-            db.collection('post').updateOne({_id : parseInt(req.params._id)}, {$inc:todo}, (err,result) => {
-                if(err) return console.log(err);
-                console.log('update!')
-                console.log(result);
-                res.render('view.ejs',{data : result})
-            });
-        })
-    })
+        const d_id = parseInt(req.params.id);
+
+        const todo = {
+            _id : d_id,
+            title : req.body.title,
+            content : req.body.content,
+            date : req.body.date
+        }
+        console.log(todo)
+        db.collection('post').updateOne({_id : d_id}, {$set:todo}, (err,result) => {
+            if(err) return console.log(err);
+            console.log('update!')
+            res.render('view.ejs',{data : result})
+        });
+
+    });
 
     // // user Register
     // app.get('/register', user.loadRegister)
