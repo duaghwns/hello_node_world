@@ -10,35 +10,34 @@ const port = 8080;
 app.set('view engine', 'ejs');
 
 let db;
+
+let _post;
+let _user;
+let _counter;
+
 let saveUser;
 let saveTodo;
-let updateTodo;
+
 MongoClient.connect(mongoUrl, (err, client) => {
     if(err) return console.log(err);
     
     db = client.db('todoapp');
-    
+
+    _post = db.collection('post');
+    _user = db.collection('user');
+    _counter = db.collection('counter');
+
     saveUser = obj => {
-        db.collection('user').insertOne(obj, (err,result) => {
+        _user.insertOne(obj, (err,result) => {
             if(err) return console.log(err);
             console.log('저장완료')
-            console.log(result);
         });
     }
 
     saveTodo = obj => {
-        db.collection('post').insertOne(obj, (err,result) => {
+        _post.insertOne(obj, (err,result) => {
             if(err) return console.log(err)
             console.log('save!')
-            console.log(result)
-        });
-    }
-
-    updateTodo = (id, obj) => {
-        db.collection('post').updateOne(id, obj, (err,result) => {
-            if(err) return console.log(err);
-            console.log('update!')
-            console.log(result);
         });
     }
 })
@@ -48,9 +47,8 @@ MongoClient.connect(mongoUrl, (err, client) => {
     
     // home
     app.get('/', (req, res) => {
-        db.collection('post').find().toArray((e,data) => {
+        _post.find().toArray((e,data) => {
             if(e) return console.log(e)
-            console.log(data)
             res.render('index.ejs', {posts : data})
         })
     })
@@ -92,15 +90,13 @@ MongoClient.connect(mongoUrl, (err, client) => {
     app.get('/todo', (req, res) => {
         let postData = db.collection('post').find().toArray((err, data) => {
             if(err) return console.log(err);
-            
-            console.log(data);
         });
         
         res.render('todo.ejs')
     })
 
     app.post('/todo', (req, res) => {
-        db.collection('counter').findOne({name:'todoCounter'},(e,data)=>{
+        _counter.findOne({name:'todoCounter'},(e,data)=>{
             if(e) return console.log(e)
             const todo = {
                 _id : data.totalCount + 1,
@@ -110,13 +106,11 @@ MongoClient.connect(mongoUrl, (err, client) => {
             }
             saveTodo(todo);
 
-            db.collection('counter').updateOne({name: "todoCounter"}, {$inc:{totalCount: 1}},(e,result)=>{
+            _counter.updateOne({name: "todoCounter"}, {$inc:{totalCount: 1}},(e,result)=>{
                 if(e) return console.log(e)
                 console.log('update!')
-                console.log(result)
-                db.collection('post').find().toArray((e,data) => {
+                _post.find().toArray((e,data) => {
                     if(e) return console.log(e)
-                    console.log(data)
                     res.render('index.ejs', {posts : data})
                 })
             })
@@ -126,18 +120,16 @@ MongoClient.connect(mongoUrl, (err, client) => {
     app.delete('/delete', (req, res) => {
         console.log(req.body)
         req.body._id = parseInt(req.body._id,);
-        db.collection('post').deleteOne(req.body, (err, result) => {
+        _post.deleteOne(req.body, (err, result) => {
             if(err) return console.log(err)
-            console.log(result)
             res.status(200).send({message: '성공했습니다'});
         })
     })
 
     app.get('/detail/:id', (req, res) => {
         console.log(req.params.id)
-        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result)=>{
+        _post.findOne({ _id : parseInt(req.params.id) },(e, result)=>{
             if(e) return console.log(e)
-            console.log(result)
             res.render('view.ejs',{data : result})
         })
     });
@@ -145,10 +137,8 @@ MongoClient.connect(mongoUrl, (err, client) => {
     app.get('/edit/:id', (req, res) => {
         console.log(req.params.id);
 
-        db.collection('post').findOne({ _id : parseInt(req.params.id) },(e, result) => {
+        _post.findOne({ _id : parseInt(req.params.id) },(e, result) => {
             if(e) return console.log(e)
-            console.log(result)
-
             res.render('edit.ejs',{data : result});
         });
     });
@@ -163,13 +153,12 @@ MongoClient.connect(mongoUrl, (err, client) => {
             date : req.body.date
         }
         console.log(todo)
-        db.collection('post').updateOne({_id : d_id}, {$set:todo}, (err,result) => {
+        _post.updateOne({_id : d_id}, {$set:todo}, (err,result) => {
             if(err) return console.log(err);
             console.log('update!')
-            
-            db.collection('post').find().toArray((e,data) => {
+
+            _post.find().toArray((e,data) => {
                 if(e) return console.log(e)
-                console.log(data)
                 res.render('index.ejs', {posts : data})
             })
         });

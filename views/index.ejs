@@ -44,12 +44,12 @@
             <h2>post</h2>
             <p>
             <div class="inputbox">
-                <input type="text" name="title" placeholder="제목"><br>
-                <textarea name="content" placeholder="내용을 입력하세요" cols="22" rows="5"></textarea>
+                <input id="v_title" type="text" name="title" placeholder="제목"><br>
+                <textarea id="v_title" name="content" placeholder="내용을 입력하세요" cols="22" rows="5"></textarea>
             </div>
             </p>
             <input type="hidden" name="date" id="v_date">
-            <input type="submit" class="btn btn-primary btn-sm"value="Save!">
+            <input type="submit" id="v_save" class="btn btn-primary btn-sm"value="Save!">
         </form>
     </div>
     <br>
@@ -78,7 +78,7 @@
                         </td>
                         <td>
                             <button class="del_todd btn btn-danger btn-sm" data-id="<%= posts[i]._id %>">
-                                삭제
+                                Delete
                             </button>
                             
                         </td>
@@ -90,9 +90,20 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         const v_date = document.querySelector('#v_date');
+        const v_save = document.querySelector('#v_save');
+
         window.onload = () => {
             v_date.value = new Date().toISOString().substring(0, 10);
         }
+
+        v_save.addEventListener('click', () =>{ 
+            const ti = document.querySelect('#v_title').value;
+            const con = document.querySelector('#v_content').value;
+            console.log(ti,con)
+            if(ti==null||con==null){
+                return false;
+            }
+        })
 
         // 삭제버튼 클릭
         $('.del_todd').click(e => {
