@@ -166,6 +166,7 @@ MongoClient.connect(mongoUrl, (err, client) => {
         db.collection('post').updateOne({_id : d_id}, {$set:todo}, (err,result) => {
             if(err) return console.log(err);
             console.log('update!')
+            
             db.collection('post').find().toArray((e,data) => {
                 if(e) return console.log(e)
                 console.log(data)
