@@ -5,18 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <title>Document</title>
     <style>
         .m30 {
-            margin-left:30px;
+            margin-left: 30px;
+        }
+
+        .inputbox {
+            border: 1px solid #999;
+            width: 180px;
+        }
+
+        input {
+            border: none;
+        }
+
+        textarea {
+            border: none;
         }
     </style>
 </head>
 
 <body>
-    
+
     <div class="navbar m30">
         <h1 onclick="location.href='/'">Index</h1>
         <a href="/login">login</a>
@@ -29,28 +41,15 @@
     <hr>
     <div class="m30">
         <form action="/todo" method="post">
-            <table>
-                <tr>
-                    <th colspan="2">
-                        <h2>todo</h2>
-                    </th>
-                </tr>
-                <tr>
-                    <th>title</th>
-                    <td><input type="text" name="title" placeholder="title"></td>
-                </tr>
-                <tr>
-                    <th>content </th>
-                    <td><textarea name="content" placeholder="내용을 입력하세요" cols="22" rows="5"></textarea></td>
-                </tr>
-                <tr>
-                    <th>date</th>
-                    <td>
-                        <input type="date" name="date">
-                        <input type="submit" value="Check!">
-                    </td>
-                </tr>
-            </table>
+            <h2>post</h2>
+            <p>
+            <div class="inputbox">
+                <input type="text" name="title" placeholder="제목"><br>
+                <textarea name="content" placeholder="내용을 입력하세요" cols="22" rows="5"></textarea>
+            </div>
+            </p>
+            <input type="hidden" name="date" id="v_date">
+            <input type="submit" value="Save!">
         </form>
     </div>
     <hr>
@@ -62,11 +61,11 @@
                 <th>작성자</th>
                 <th>날짜</th>
             </tr>
-            <% for(let i=posts.length-1; i >= 0; i--) { %>
+            <% for(let i=posts.length-1; i>= 0; i--) { %>
                 <tr id="post<%=posts[i]._id%>">
                     <td>
                         <%= i+1 %>
-                        (<%=posts[i]._id%>)
+                            (<%=posts[i]._id%>)
                     </td>
                     <td><a href="/detail/<%=posts[i]._id%>">
                             <%= posts[i].title %>
@@ -86,6 +85,11 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
+        const v_date = document.querySelector('#v_date');
+        window.onload = () => {
+            v_date.value = new Date().toISOString().substring(0, 10);
+        }
+
         // 삭제버튼 클릭
         $('.del_todd').click(e => {
             let post_id = e.target.dataset.id;
@@ -93,7 +97,8 @@
                 method: 'DELETE',
                 url: '/delete',
                 data: { _id: post_id }
-            }).done(res => { $(`#post${post_id}`).fadeOut();
+            }).done(res => {
+                $(`#post${post_id}`).fadeOut();
             }).fail(err => { console.log(err) });
         });
     </script>
