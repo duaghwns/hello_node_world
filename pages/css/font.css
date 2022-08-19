@@ -1,8 +1,9 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
-@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&family=Noto+Serif+HK:wght@700&family=Open+Sans&display=swap');
 
 .hn-font {
-    font-family: 'Hanna', sans-serif;
+    font-family: 'Noto Serif HK', serif;
+
 }
 
 .jg-font {
