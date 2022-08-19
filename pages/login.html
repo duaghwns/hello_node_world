@@ -4,50 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login.css">
-    <style>
-        .login-container {
-            margin: 10px;
-            box-shadow: 1px 1px 1px 1px gray;
-            border: 1px solid black;
-            position: relative;
-            width: 400px;
-            height: 500PX;
-        }
-
-        .login-container .container-box{
-            text-align: center;
-            width: 100%;
-            margin-top: 40%;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/login.css" type="text/css">
+    <link rel="stylesheet" href="/css/font.css" type="text/css">
     <title>Document</title>
 </head>
 <body>
-    <div class="login-container">
+<div class="wrapper">
+    <div class="login-container ">
         <div class="container-box">
             <div class="login-title">
-                <h2 onclick="location.href='/'">Login</h2>
+                <h2 onclick="location.href='/'" class="hn-font recody">Login</h2>
             </div>
-            <form action="/login" method="post">
+            <form action="/login" method="post" class="jg-font">
                 <p>
-                    <input type="text" name="id" id="" placeholder="ID">
+                    <input class="loginTextInput" type="text" name="id" id="" placeholder="ID">
                 </p>
                 <p>
-                    <input type="password" name="pw" id="" placeholder="PW">
+                    <input class="loginTextInput" type="password" name="pw" id="" placeholder="PW">
                 </p>
                 <p>
-                    <input type="checkbox" name="saveId" id="">
+                    <input type="checkbox" name="saveId">
                     <span>아이디 저장</span>
-                    <input type="checkbox" name="autoLogin" id="">
+                    <input type="checkbox" name="autoLogin">
                     <span>자동 로그인</span>
                 </p>
                 <p>
-                    <input type="submit" value="로그인"><br>
-                    <input type="button" value="회원가입" onclick="location.href='/register.html'">
+                    <input class="btn btn-danger loginBtn" type="submit" value="로그인" >
                 </p>
-                </form>
+                <p>
+                    <input class="btn loginBtn btnHover" type="button" value="회원가입" onclick="location.href='/register.html'">
+                </p>
+            </form>
         </div>
     </div>
+</div>
+<script>
+
+</script>
 </body>
 </html>

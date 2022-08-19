@@ -43,8 +43,11 @@ MongoClient.connect(mongoUrl, (err, client) => {
 })
 
     app.listen(port, ()=> {console.log(`listening on port ${port}`)});
-    app.use(bodyParser.urlencoded({ extended : true }));
     
+    // 없으면 css link 안됌
+    app.use(express.static(__dirname + '/pages'))
+    app.use(bodyParser.urlencoded({ extended : true }));
+
     // home
     app.get('/', (req, res) => {
         _post.find().toArray((e,data) => {

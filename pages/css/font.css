@@ -1,0 +1,16 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
+.hn-font {
+    font-family: 'Hanna', sans-serif;
+}
+
+.jg-font {
+    font-family: 'Jeju Gothic', sans-serif;
+    color: darkslategray;
+}
+
+.recody {
+    color: #CB5A44;
+}
+
