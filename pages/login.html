@@ -6,46 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/login.css">
     <style>
-        .container {
+        .login-container {
+            margin: 10px;
+            box-shadow: 1px 1px 1px 1px gray;
             border: 1px solid black;
             position: relative;
-            left: 50%;
+            width: 400px;
+            height: 500PX;
+        }
+
+        .login-container .container-box{
+            text-align: center;
+            width: 100%;
+            margin-top: 40%;
         }
     </style>
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="login-container">
         <div class="container-box">
-            <h1 onclick="location.href='/'">Login</h1>
+            <div class="login-title">
+                <h2 onclick="location.href='/'">Login</h2>
+            </div>
             <form action="/login" method="post">
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <td><input type="text" name="id" id=""></td>
-                    </tr>
-                    <tr>
-                        <th>PW</th>
-                        <td><input type="password" name="pw" id=""></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" name="saveId" id="">
-                            <span>아이디 저장</span>
-                        </td>
-                        <td>
-                            <input type="checkbox" name="autoLogin" id="">
-                            <span>자동 로그인</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center;">
-                            <input type="submit" value="로그인">
-                            <input type="button" value="회원가입" onclick="location.href='/register.html'">
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                <p>
+                    <input type="text" name="id" id="" placeholder="ID">
+                </p>
+                <p>
+                    <input type="password" name="pw" id="" placeholder="PW">
+                </p>
+                <p>
+                    <input type="checkbox" name="saveId" id="">
+                    <span>아이디 저장</span>
+                    <input type="checkbox" name="autoLogin" id="">
+                    <span>자동 로그인</span>
+                </p>
+                <p>
+                    <input type="submit" value="로그인"><br>
+                    <input type="button" value="회원가입" onclick="location.href='/register.html'">
+                </p>
+                </form>
         </div>
     </div>
 </body>
