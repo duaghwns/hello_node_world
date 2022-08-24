@@ -86,19 +86,72 @@
                     <input type="checkbox" name="provision" id=""><span>동의</span>
                 </div>
             </div>
-            <hr>
-            <div class="registerStep">
-                <button class="btn btn-primary" onclick="location.href='./register2.html'">다음</button>
-            </div>
+            
+            <div class="container-register">
+                <form action="/register" method="post">
+                    
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <td><input type="text" name="id" id="id" class="pw"></td>
+                        </tr>
+                        <tr>
+                            <th>password</th>
+                            <td><input type="password" name="pw" id="pw" class="pw"></td>
+                        </tr>
+                        <tr>
+                            <th>passwordChk</th>
+                            <td>
+                                <input type="password" id="pwChk">
+                                <i id="icon_pw"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>birth</th>
+                        <td><input type="text" name="birth" id=""></td>
+                    </tr>
+                    <tr>
+                        <th>HP</th>
+                        <td><input type="text" name="hp" id=""></td>
+                    </tr>
+                    <tr style="text-align:right">
+                        <td colspan="2" >
+                            <input type="button" value="Go to Login" onclick="location.href='/login'">
+                            <input type="submit" value="회원가입">
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
 <script>
+    const pw = document.querySelector('#pw')
+    const pwChk = document.querySelector('#pwChk')
+    const arrPw = document.querySelectorAll('.pw')
+    const iconPw = document.querySelector('#icon_pw')
     const chkProviisons = document.querySelector('#chk_proviisons')
 
     chkProviisons.addEventListener('click', () => {
         document.querySelectorAll('.chks').values().forEach(()=>{this.value = true;})
     });
+
+    function chk(){
+        if(pwChk.value.length > 5 && pw.value.length > 5){
+            console.log(pw.value == pwChk.value)
+            console.log(pw.value, pwChk.value)
+            if(pw.value == pwChk.value){
+                iconPw.innerHTML = '비밀번호 일치'
+            } else {
+                iconPw.innerHTML = '비밀번호 불일치'
+            }
+        }
+    }
+
+    arrPw.forEach((a,i)=>{
+        a.addEventListener('keypress',chk);
+    })
+
 </script>
 </body>
 </html>
