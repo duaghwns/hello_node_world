@@ -168,8 +168,6 @@ MongoClient.connect(mongoUrl, (err, client) => {
 
     });
 
-
-
     // // user Register
     // app.get('/register', user.loadRegister)
     // app.post('/register', user.saveUser)
