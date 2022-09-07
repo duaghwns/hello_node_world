@@ -15,37 +15,39 @@
     <div class="wrapper">
         <div class="register">
             <h1 onclick="location.href='/'" class="recody">Register</h1>
-
-            <div class="step-box">
-                <div class="step">약관동의</div>
-                <div class="step">본인인증</div>
-                <div class="step">정보입력</div>
-                <div class="step">가입완료</div>
-            </div>
-
+            <hr>
             <div class="container-register">
                 <form action="/register" method="post">
+                    <p>
                     <h3>아이디</h3>
                     <input type="text" name="id" id="id" class="pw">
+                    <div class="hid hid-id"></div>
                     <h3>비밀번호</h3>
-                    <td><input type="password" name="pw" id="pw" class="pw"></td>
+                    <input type="password" name="pw" id="pw" class="pw">
+                    <div class="hid hid-pw"></div>
                     <h3>비밀번호 확인</h3>
                     <input type="password" id="pwChk">
+                    <div class="hid hid-pwchk"></div>
                     <i id="icon_pw"></i>
                     <h3>생년월일</h3>
-                    <td><input type="text" name="birth" id=""></td>
+                    <input type="text" name="birth" id="">
+                    <div class="hid hid-birth"></div>
                     <h3>성별</h3>
-                    
+                    <select name="sex" id="">
+                        <option value="M">남자</option>
+                        <option value="M">여자</option>
+                        <option value="M">선택안함</option>
+                    </select>
+                    <div class="hid hid-sex"></div>
                     <h3>휴대전화</h3>
-                    <td><input type="text" name="hp" id=""></td>
-                    <td colspan="2">
-                        <input type="button" value="Go to Login" onclick="location.href='/login'">
-                        <input type="submit" value="회원가입">
+                    <input type="text" name="hp" id="">
+                    <div class="hid hid-hp"></div>
+                    </p>
+                    <button class="btn btn-primary" onclick="location.href='./register.html'">이전</button>
+                    <input class="btn btn-primary" type="submit" value="회원가입">
                 </form>
                 <div class="registerStep">
                     <hr>
-                    <button class="btn btn-primary" onclick="location.href='./register.html'">이전</button>
-                    <button class="btn btn-primary" onclick="location.href='./register2.html'">다음</button>
                 </div>
             </div>
         </div>

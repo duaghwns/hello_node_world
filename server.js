@@ -4,10 +4,17 @@ const bodyParser = require('body-parser');
 const _dirPages = __dirname + '/pages/'
 const mongoUrl = 'mongodb+srv://root:root@cluster0.n5blm.mongodb.net/?retryWrites=true&w=majority'
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
 // ejs 사용
 const app = express();
 const port = 8080;
 app.set('view engine', 'ejs');
+
+app.use(session({secret: 'secret', resave: true, saveUninitialized:false}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 let db;
 
