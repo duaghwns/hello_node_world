@@ -176,9 +176,10 @@ MongoClient.connect(mongoUrl, (err, client) => {
     });
 
 
-    app.post('/login', passport.authenticate('local',{failureRedirect:'/fail'}),(req,res)=>{
+    app.post('/login', passport.authenticate('local',{
+        failureRedirect:'/fail'})
+        ,(req,res)=>{
         res.redirect('/')
-        
     })
     
 
