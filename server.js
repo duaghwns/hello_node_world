@@ -175,6 +175,37 @@ MongoClient.connect(mongoUrl, (err, client) => {
 
     });
 
+
+    app.post('/login', passport.authenticate('local',{failureRedirect:'/fail'}),(req,res)=>{
+        res.redirect('/')
+        
+    })
+    
+
+    passport.use(new LocalStrategy({
+        usernameField: 'id',
+        passwordField: 'pw',
+        session: true,
+        passReqToCallback: false
+    }, (input_id, input_pw, done) => {
+        db.collection('user').findOne({id:input_id}, (err, res) => {
+            if(err) return done(err)
+            if(!res) return done(null,false, {message:'존재하지 않는 아이디입니다'})
+            if(input_pw == res.pw) {
+                return done(null, res)
+            } else {
+                return done(null, false, {message:'비번틀렸어요'})
+            }
+        })
+    }));
+
+    passport.serializeUser((user, done)=>{
+        done(null,user.id)
+    })
+
+    passport.deserializeUser((id, done)=>{
+        done(null,{})
+    })
     // // user Register
     // app.get('/register', user.loadRegister)
     // app.post('/register', user.saveUser)
