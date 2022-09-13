@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="/css/font.css" type="text/css">
     <title>Register</title>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="register">
@@ -24,7 +26,7 @@
             <!-- 개인정보 제공 동의 -->
             <div class="container jg-font">
                 <div class="provision">
-                    <input type="checkbox" name="provision" id="chk_proviisons"><span class="large">모든 약관 확인</span>
+                    <input type="checkbox" id="chk_proviisons"><span class="large">모든 약관 확인</span>
                     <div class="content">
                         <p>
                             수천 수만개의 약관내용이 있습니다.
@@ -51,7 +53,7 @@
                             수천 수만개의 약관내용이 있습니다.수천 수만개의 약관내용이 있습니다.
                         </p>
                     </div>
-                    <input type="checkbox" name="provision" id=""><span>동의</span>
+                    <input type="checkbox" class="input_provider" name="provision" id=""><span>동의</span>
                 </div>
             </div>
             <!-- 마케팅 활용 동의 -->
@@ -83,22 +85,42 @@
                             수천 수만개의 약관내용이 있습니다.수천 수만개의 약관내용이 있습니다.
                         </p>
                     </div>
-                    <input type="checkbox" name="provision" id=""><span>동의</span>
+                    <input type="checkbox" class="input_provider" name="provision" id=""><span>동의</span>
                 </div>
             </div>
             <div class="registerStep">
                 <hr>
-                <button class="btn btn-primary" onclick="location.href='./register2.html'">다음</button>
+                <button class="btn btn-primary" id="nextStep">다음</button>
             </div>
         </div>
     </div>
-</div>
-<script>
-    const chkProviisons = document.querySelector('#chk_proviisons')
+    </div>
+    <script>
+        const chkProviisons = document.querySelector('#chk_proviisons')
+        const nextStep = document.querySelector('#nextStep')
+        const provisions = document.querySelectorAll('.input_provider');
 
-    chkProviisons.addEventListener('click', () => {
-        document.querySelectorAll('.chks').values().forEach(()=>{this.value = true;})
-    });
-</script>
+        chkProviisons.addEventListener('click', e => {
+            chkProviisons.checked 
+            ? provisions.forEach(provision => {provision.checked = true;})
+            : provisions.forEach(provision => {provision.checked = false;})
+        });
+
+        nextStep.addEventListener('click', e => {
+            let goToNextStep = false;
+
+            provisions.forEach((provision) => { goToNextStep = provision.checked ? true : false; });
+
+            if (goToNextStep) {
+                location.href = './register2.html';
+            } else {
+                alert('Please select a provision');
+                return;
+            }
+        });
+
+
+    </script>
 </body>
+
 </html>
