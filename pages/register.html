@@ -96,31 +96,32 @@
     </div>
     </div>
     <script>
-        const chkProviisons = document.querySelector('#chk_proviisons')
-        const nextStep = document.querySelector('#nextStep')
+        const chkProviisons = document.querySelector('#chk_proviisons');
+        const nextStep = document.querySelector('#nextStep');
         const provisions = document.querySelectorAll('.input_provider');
 
         chkProviisons.addEventListener('click', e => {
-            chkProviisons.checked 
-            ? provisions.forEach(provision => {provision.checked = true;})
-            : provisions.forEach(provision => {provision.checked = false;})
+            chkProviisons.checked
+                ? provisions.forEach(provision => { provision.checked = true; })
+                : provisions.forEach(provision => { provision.checked = false; })
         });
 
         nextStep.addEventListener('click', e => {
-            let goToNextStep = false;
+            let goToNextStep = [];
 
-            provisions.forEach((provision) => { goToNextStep = provision.checked ? true : false; });
+            provisions.forEach((provision) => { 
+                provision.checked ? goToNextStep.push(true) : goToNextStep.push(false); 
+            });
 
-            if (goToNextStep) {
-                location.href = './register2.html';
-            } else {
-                alert('Please select a provision');
-                return;
-            }
+            goToNextStep.forEach(next => {
+                if (next) {
+                    location.href = './register2.html';
+                } else {
+                    alert('Please select a provision');
+                    return;
+                }
+            })
         });
-
-
     </script>
 </body>
-
 </html>
